@@ -1,0 +1,28 @@
+{
+  "name": "Perttu2GappsFrontend",
+  "version": "1",
+  "authors": [
+    "ristinolla <perttu.ristimella@gmail.com>"
+  ],
+  "description": "Awesomeness",
+  "main": "index.html",
+  "keywords": [
+    "na"
+  ],
+  "license": "WTFPL",
+  "homepage": "https://circular-gist-694.appspot.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "1.7.0"
+  },
+  "devDependencies": {
+    "angular": "1.2.22"
+  }
+}
