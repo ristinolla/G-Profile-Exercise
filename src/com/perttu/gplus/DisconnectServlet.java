@@ -1,5 +1,6 @@
 /**
 * Modified by Perttu from: https://github.com/googleplus/gplus-quickstart-java
+* - Actually modified only the use of UTILS class, not much else.
 **/
 
 package com.perttu.gplus;
@@ -26,23 +27,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class DisconnectServlet extends HttpServlet {
-	
-	
-  /** TODO: nama vois olla utilsseissakin... **/ 
+
+
+  /** TODO: nama vois olla utilsseissakin... **/
   private static final HttpTransport TRANSPORT = new NetHttpTransport();
   private static final JacksonFactory JSON_FACTORY = new JacksonFactory();
   private static final Gson GSON = new Gson();
-  
+
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     response.setContentType("application/json");
-    
+
     // Only disconnect a connected user.
     String tokenData = (String) request.getSession().getAttribute("token");
     if (tokenData == null) {
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-      response.getWriter().print(GSON.toJson("Current user not connected."));
+      response.getWriter().print(GSON.toJson("{ error: 'Current user not connected' }"));
       return;
     }
     try {

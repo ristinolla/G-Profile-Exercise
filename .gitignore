@@ -1,6 +1,11 @@
 .*
 !/.gitignore
 !.bowerrc
-
-
+!.jshintrc
 *.log
+
+/node_modules
+/bower_components
+
+/war/WEB-INF/classes
+/war/WEB-INF/lib

@@ -17,14 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
-
 /**
 * Initialize a session for the current user, and render index.html.
 */
 public class MainServlet extends HttpServlet {
- 
-	
+
+
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -40,10 +38,10 @@ public class MainServlet extends HttpServlet {
       // Store it in the session for later validation.
       String state = new BigInteger(130, new SecureRandom()).toString(32);
       request.getSession().setAttribute("state", state);
+
       // Fancy way to read index.html into memory, and set the client ID
       // and state values in the HTML before serving it.
-      System.out.println(Utils.getApplicationName());
-      response.getWriter().print(new Scanner(new File("mainpage.html"), "UTF-8")
+      response.getWriter().print(new Scanner(new File("app.html"), "UTF-8")
           .useDelimiter("\\A").next()
           .replaceAll("[{]{2}\\s*CLIENT_ID\\s*[}]{2}", Utils.getClientID())
           .replaceAll("[{]{2}\\s*STATE\\s*[}]{2}", state)
@@ -51,11 +49,11 @@ public class MainServlet extends HttpServlet {
               Utils.getApplicationName() )
           .toString());
       response.setStatus(HttpServletResponse.SC_OK);
+
     } catch (FileNotFoundException e) {
       // When running the quickstart, there was some path issue in finding
       // index.html.  Double check the quickstart guide.
       e.printStackTrace();
-      
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
       response.getWriter().print(e.toString());
     }

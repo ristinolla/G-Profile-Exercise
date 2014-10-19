@@ -1,5 +1,6 @@
 /**
 * Modified by Perttu from: https://github.com/googleplus/gplus-quickstart-java
+* - Actually modified only the use of UTILS class, not much else.
 **/
 
 package com.perttu.gplus;
@@ -31,13 +32,13 @@ import javax.servlet.http.HttpServletResponse;
  * Example URI: /connect?state=...&gplus_id=...
  */
 public class ConnectServlet extends HttpServlet {
- 
-  /** TODO: nama vois olla utilsseissakin... **/ 
+
+  /** TODO: nama vois olla utilsseissakin... **/
   private static final HttpTransport TRANSPORT = new NetHttpTransport();
   private static final JacksonFactory JSON_FACTORY = new JacksonFactory();
   private static final Gson GSON = new Gson();
-  
-	
+
+
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     response.setContentType("application/json");
@@ -56,7 +57,7 @@ public class ConnectServlet extends HttpServlet {
       response.getWriter().print(GSON.toJson("Invalid state parameter."));
       return;
     }
-   
+
     // Normally the state would be a one-time use token, however in our
     // simple case, we want a user to be able to connect and disconnect
     // without reloading the page.  Thus, for demonstration, we don't
@@ -97,7 +98,7 @@ public class ConnectServlet extends HttpServlet {
    *
    * @param inputStream the InputStream to be read.
    * @return the content of the InputStream as a ByteArrayOutputStream.
-   * @throws IOException 
+   * @throws IOException
    */
   static void getContent(InputStream inputStream, ByteArrayOutputStream outputStream)
       throws IOException {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Gapps_Task</servlet-name>
+		<servlet-class>com.perttu.gplus.Gapps_TaskServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Gapps_Task</servlet-name>
+		<url-pattern>/gapps_task</url-pattern>
+	</servlet-mapping>
+
+	<!-- Map urls according to the signin.java -->
+	<servlet>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>com.perttu.gplus.MainServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DisconnectServlet</servlet-name>
+		<servlet-class>com.perttu.gplus.DisconnectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisconnectServlet</servlet-name>
+		<url-pattern>/disconnect</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ConnectServlet</servlet-name>
+		<servlet-class>com.perttu.gplus.ConnectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConnectServlet</servlet-name>
+		<url-pattern>/connect</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PeopleServlet</servlet-name>
+		<servlet-class>com.perttu.gplus.PeopleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PeopleServlet</servlet-name>
+		<url-pattern>/people</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProfileServlet</servlet-name>
+		<servlet-class>com.perttu.gplus.ProfileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileServlet</servlet-name>
+		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+
+</web-app>

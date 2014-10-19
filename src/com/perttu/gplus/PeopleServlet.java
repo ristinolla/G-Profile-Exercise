@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletResponse;
  * Get list of people user has shared with this app.
  */
 public class PeopleServlet extends HttpServlet {
-  
-  /** TODO: nama vois olla utilsseissakin... **/ 
+
+  /** TODO: nama vois olla utilsseissakin... **/
   private static final HttpTransport TRANSPORT = new NetHttpTransport();
   private static final JacksonFactory JSON_FACTORY = new JacksonFactory();
   private static final Gson GSON = new Gson();
-  
+
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -59,12 +59,11 @@ public class PeopleServlet extends HttpServlet {
       Plus service = new Plus.Builder(TRANSPORT, JSON_FACTORY, credential)
           .setApplicationName(Utils.getApplicationName())
           .build();
+
       //Get a list of people that this user has shared with this app.
-      //PeopleFeed people = service.people().list("me", "visible").execute();
-      //Person person = service.person().clone("me", "vault").execute();
-      Person profile = service.people().get("me").execute();
+      PeopleFeed people = service.people().list("me", "visible").execute();
       response.setStatus(HttpServletResponse.SC_OK);
-      response.getWriter().print(GSON.toJson(profile)); // moded
+      response.getWriter().print(GSON.toJson(people));
     } catch (IOException e) {
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       response.getWriter().print(GSON.toJson("Failed to read data from Google. " +
