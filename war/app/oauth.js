@@ -19,10 +19,9 @@ var oauth = (function() {
 
         // The user is signed in
         this.authResult = authResult;
-
         oauth.connectServer();
         $('#gConnect').hide();
-
+        
       } else if (authResult.error) {
         // There was an error, which means the user is not signed in.
         // As an example, you can troubleshoot by writing to the console:
@@ -64,6 +63,7 @@ var oauth = (function() {
         contentType: 'application/octet-stream; charset=utf-8',
         success: function(result) {
           console.log("result:", result);
+          //renderer.getProfile();
         },
         error: function(e) {
           console.log(e);

@@ -4,14 +4,7 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	<servlet>
-		<servlet-name>Gapps_Task</servlet-name>
-		<servlet-class>com.perttu.gplus.Gapps_TaskServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Gapps_Task</servlet-name>
-		<url-pattern>/gapps_task</url-pattern>
-	</servlet-mapping>
+
 
 	<!-- Map urls according to the signin.java -->
 	<servlet>
@@ -29,7 +22,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DisconnectServlet</servlet-name>
-		<url-pattern>/disconnect</url-pattern>
+		<url-pattern>/api/disconnect</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -38,7 +31,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ConnectServlet</servlet-name>
-		<url-pattern>/connect</url-pattern>
+		<url-pattern>/api/connect</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -47,7 +40,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PeopleServlet</servlet-name>
-		<url-pattern>/people</url-pattern>
+		<url-pattern>/api/people</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -56,7 +49,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ProfileServlet</servlet-name>
-		<url-pattern>/profile</url-pattern>
+		<url-pattern>/api/profile</url-pattern>
 	</servlet-mapping>
 
 </web-app>

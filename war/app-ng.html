@@ -1,0 +1,31 @@
+<html ng-app="profileApp"  ang-cloak >
+<head>
+	<title>{{ APPLICATION_NAME }}</title>
+
+
+	<script src="https://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div class="buttons" ng-controller="OauthCtrl">
+		<button id="disconnect" ng-click="signOut()" >Disconnect your Google account from this app</button>
+
+		<span id="signin">
+  		<span id="myGsignin">{{ renderSignIn() }}</span>
+		</span>
+	</div>
+
+
+
+</body>
+
+<script type="text/javascript">
+	var STATE = "{{ STATE }}";
+</script>
+
+<script src="assets/vendor/angular/angular.min.js"></script>
+<script src="assets/vendor/angular-route/angular-route.min.js"></script>
+<!-- <script src="/assets/vendor/lib.js"></script> -->
+<script src="/assets/js/app.js"></script>
+
+</html>

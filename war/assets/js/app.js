@@ -1,104 +1,160 @@
-/***
-** Note by Perttu: this based on: https://github.com/googleplus/gplus-quickstart-java
-**
+/**
+
+
 **/
-var oauth = (function() {
-  var authResult;
+var app = angular.module('profileApp', []);
 
-  return {
-    /**
-     * Hides the sign-in button and connects the server-side app after
-     * the user successfully signs in.
-     *
-     * @param {Object} authResult An Object which contains the access token and
-     *   other authentication information.
-     */
-    onSignInCallback: function(authResult) {
+/*
+ * Api Service
+ *
+*/
 
-      if (authResult.access_token) {
+app.service("ApiService", function($http, $q){
 
-        // The user is signed in
-        this.authResult = authResult;
 
-        oauth.connectServer();
-        $('#gConnect').hide();
+	// Public Methods
+	// --------------
 
-      } else if (authResult.error) {
-        // There was an error, which means the user is not signed in.
-        // As an example, you can troubleshoot by writing to the console:
-        console.log('There was an error: ' + authResult.error);
-      }
-      //console.log('authResult: ', authResult);
-    },
+	// POST requests login information to the server,
+	// where ConnectServlet.java handles the server connection to google
+	function connect( authResult ){
+		var request = $http({
+					method: "post",
+					url: "/api/connect?state=" + STATE,
+					data: authResult.code,
+					contentType: 'application/octet-stream; charset=utf-8'
+				});
 
-    /**
-     * Calls the server endpoint to disconnect the app for the user.
-     */
-    disconnectServer: function() {
-      // Revoke the server tokens
-      $.ajax({
-        type: 'POST',
-        url: window.location.href + 'disconnect',
-        async: false,
-        data: {"token": oauth.authResult.code },
-        success: function(result) {
-          console.log('revoke response: ' + result);
-        },
-        error: function(e) {
-          console.log(e);
-        }
-      });
-    },
-    /**
-     * Calls the server endpoint to connect the app for the user. The client
-     * sends the one-time authorization code to the server and the server
-     * exchanges the code for its own tokens to use for offline API access.
-     * For more information, see:
-     *   https://developers.google.com/+/web/signin/server-side-flow
-     */
-    connectServer: function() {
-      //console.log(this.authResult.code);
-      $.ajax({
-        type: 'POST',
-        url: window.location.href + 'connect?state=' + STATE,
-        contentType: 'application/octet-stream; charset=utf-8',
-        success: function(result) {
-          console.log("result:", result);
-        },
-        error: function(e) {
-          console.log(e);
-        },
-        processData: false,
-        data: this.authResult.code
-      });
-    }
+		return (request.then(handleSuccess, handleError ));
+	}
 
+
+	// POSTS the disconnect method
+	function disconnect( authResult ){
+		console.log('disconnect in services');
+		var request = $http({
+					method: "post",
+					url: "/api/disconnect",
+					data: {"token": authResult.code },
+					contentType: 'application/octet-stream; charset=utf-8'
+				});
+
+		return (request.then(handleSuccess, handleError ));
+	}
+
+
+	// Private methods
+	// ---------------
+	function handleError( response ) {
+		if ( ! angular.isObject( response.data ) || ! response.data.message) {
+				return( $q.reject( "An unknown error occurred." ) );
+		}
+		// Otherwise, use expected error message.
+		return( $q.reject( response.data.message ) );
+
+	}
+
+	function handleSuccess( response ) {
+				console.log(response.data);
+				return( response.data );
+	}
+
+	return({
+		connect: connect,
+		disconnect: disconnect
+	});
+});
+
+/**
+ *
+ *
+ *
+ *
+ */
+
+app.controller('OauthCtrl', function ($scope, $http, ApiService) {
+
+  $scope.isSignedIn = false;
+  $scope.immediateFailed = false;
+  $scope.authResult = {};
+
+
+  $scope.data = {
+    'callback': $scope.signIn,
+    'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
+    'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+    'scope': 'https://www.googleapis.com/auth/plus.login',
+    'theme': 'dark',
+    'cookiepolicy': 'single_host_origin',
+    'accesstype': 'offline'
   };
-})();
 
-var profileApp = angular.module('profileApp', []);
+  $scope.signedIn = function(profile) {
+    $scope.isSignedIn = true;
+    //$scope.userProfile = profile;
+    console.log('Signed In');
+  };
 
-profileApp.controller('ProfileCtrl', function ($scope, $http) {
-  $http.get('profile').success(function(data) {
-    $scope.profile = data;
-  });
-});
+  $scope.sendSignIn = function (authResult){
+    return $http.post('/api/connect', authResult);
+  };
+
+  $scope.signIn = function(authResult) {
+    $scope.$apply(function() {
+      /*if(authResult.status.signed_in){
+        $scope.isSignedIn = true;
+      }*/
+      $scope.authResult = authResult;
+      console.log('Authresult: ', authResult);
+      $scope.processAuth(authResult);
+    });
+  };
 
 
-/**
-* Calls the helper method that handles the authentication flow.
-*
-* @param {Object} authResult An Object which contains the access token and
-*   other authentication information.
-*/
-function onSignInCallback(authResult) {
-	oauth.onSignInCallback(authResult);
-}
+  $scope.processAuth = function(authResult) {
+    $scope.immediateFailed = true;
+    if ($scope.isSignedIn) {
+      return 0;
+    }
+    if (authResult.access_token) {
+      $scope.immediateFailed = false;
 
-/**
-* Perform jQuery initialization and check to ensure that you updated your
-* client ID.
-*/
-$(document).ready(function() {
-	$('#disconnect').on('click', oauth.disconnectServer);
-});
+      // Successfully authorized, create session
+      ApiService.connect(authResult).then(function(response) {
+        $scope.signedIn(response.data);
+      },
+        function(reason){
+          console.log('Connection failed because: ', reason);
+        }
+      );
+    } else if (authResult.error) {
+      // checks if the immediate login can be done
+      if (authResult.error === 'immediate_failed') {
+        console.log('Immediate Connection failed');
+        $scope.immediateFailed = true;
+      } else {
+        console.log('Error:' + authResult.error);
+      }
+    }
+  };
+
+
+  $scope.renderSignIn = function() {
+    return gapi.signin.render('myGsignin', {
+      'callback': $scope.signIn,
+      'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
+      'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+      'scope': 'https://www.googleapis.com/auth/plus.login',
+      'theme': 'dark',
+      'cookiepolicy': 'single_host_origin',
+      'accesstype': 'offline'
+    });
+  };
+
+  $scope.signOut = function (){
+    console.log('signOut in controller', $scope.authResult);
+    ApiService.disconnect( $scope.authResult);
+  };
+
+
+}); // End Oauth Ctrl

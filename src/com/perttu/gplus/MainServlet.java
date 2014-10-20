@@ -41,7 +41,7 @@ public class MainServlet extends HttpServlet {
 
       // Fancy way to read index.html into memory, and set the client ID
       // and state values in the HTML before serving it.
-      response.getWriter().print(new Scanner(new File("app.html"), "UTF-8")
+      response.getWriter().print(new Scanner(new File("app-ng.html"), "UTF-8")
           .useDelimiter("\\A").next()
           .replaceAll("[{]{2}\\s*CLIENT_ID\\s*[}]{2}", Utils.getClientID())
           .replaceAll("[{]{2}\\s*STATE\\s*[}]{2}", state)

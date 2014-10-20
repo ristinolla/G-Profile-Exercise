@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
+    plumber = require('gulp-plumber'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
@@ -27,11 +28,11 @@ gulp.task('styles', function () {
 //Scripts
 gulp.task('scripts', function () {
   return gulp.src([
-			'war/app/oauth.js',
-			'war/app/renderers.js',
+      'war/app/app.js',
+			'war/app/services.js',
       'war/app/controllers.js',
-      'war/app/buttons.js'
     ])
+    .pipe(plumber())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(concat('app.js'))
@@ -46,13 +47,14 @@ gulp.task('scripts', function () {
 //Library sripts
 gulp.task('script-lib', function () {
   return gulp.src([
-      'bower_components/angular/angular.min.js'
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular-route/angular-route.min.js'
     ])
     .pipe(concat('lib.js'))
-    .pipe(gulp.dest('war/assets/js'))
+    .pipe(gulp.dest('war/assets/vendor'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
-    .pipe(gulp.dest('war/assets/js'))
+    .pipe(gulp.dest('war/assets/vendor'))
     .pipe(notify({ message: 'Libs task complete' }));
 });
 
@@ -86,7 +88,7 @@ gulp.task('clean-images', function(cb) {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'modernizr');
+    gulp.start('styles', 'scripts','script-lib', 'modernizr');
 });
 
 

@@ -27,12 +27,15 @@
       </button>
     </div>
     <button id="disconnect" >Disconnect your Google account from this app</button>
+    <span id="signin" ng-show="immediateFailed">
+        <span id="myGsignin"></span>
+    </span>
   </div>
 
 
-  <div id="authOps" ng-controller="ProfileCtrl">
+  <div ng-controller="ProfileCtrl">
 
-    <span>{{profile.aboutMe}}</span>
+    <h3>{{profile.aboutMe}}</h3>
 
   </div>
 
@@ -40,9 +43,12 @@
 
 <script type="text/javascript">
   var STATE = "{{ STATE }}";
+  console.log(STATE);
 </script>
 
-<script src="/assets/js/lib.js"></script>
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.min.js"></script>
+<!-- <script src="/assets/vendor/lib.js"></script> -->
 <script src="/assets/js/app.js"></script>
 
 </html>
