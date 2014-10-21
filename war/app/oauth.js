@@ -1,6 +1,6 @@
 /***
 ** Note by Perttu: this based on: https://github.com/googleplus/gplus-quickstart-java
-**
+** NOT USED
 **/
 var oauth = (function() {
   var authResult;
@@ -21,7 +21,7 @@ var oauth = (function() {
         this.authResult = authResult;
         oauth.connectServer();
         $('#gConnect').hide();
-        
+
       } else if (authResult.error) {
         // There was an error, which means the user is not signed in.
         // As an example, you can troubleshoot by writing to the console:

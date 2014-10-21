@@ -29,8 +29,9 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
   return gulp.src([
       'war/app/app.js',
-			'war/app/services.js',
-      'war/app/controllers.js',
+			'war/app/api-service.js',
+      'war/app/oauth-service.js',
+      'war/app/controller.js'
     ])
     .pipe(plumber())
     .pipe(jshint('.jshintrc'))

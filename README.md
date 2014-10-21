@@ -1,4 +1,4 @@
-# Perttu 2 Gapps
+# G+ Profile Excercise
 
 This is a repository for
 
@@ -11,9 +11,8 @@ Startpoint from: https://github.com/googleplus/gplus-quickstart-java
 Main modifications / Additions
 	- separating the single Signin.java to multiple servlets.
 	- UTILS as separate class
-	-
-
-
 
 
 ## Front-end
+
+Badass angular stuff
