@@ -31,17 +31,15 @@ app.factory("OauthService", function($http, $q, ApiService){
 	*/
 	OauthService.processAuth = function( authResult ) {
 
-			console.log('aurg', authResult);
-
 			var deferred = $q.defer();
 
 			if (this.isSignedIn) {
-
 				deferred.resolve({
 					signedIn: true,
 					message: "Already signed in."
 				});
 			}
+
 			// Access_token is provided by client:plusone.js api.
 			if (authResult.access_token) {
 				this.immediateFailed = false;

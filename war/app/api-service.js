@@ -26,11 +26,10 @@ app.service("ApiService", function($http, $q){
 
 	// POSTS the disconnect method
 	ApiService.disconnect = function( authResult ){
-		console.log('Disconnext in services');
 		var request = $http({
 					method: "post",
 					url: "/api/disconnect",
-					data: {"token": authResult.access_token },
+					data: {"token": authResult.code },
 					contentType: 'application/octet-stream; charset=utf-8'
 				});
 

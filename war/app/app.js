@@ -3,12 +3,11 @@
 
 **/
 var app = angular.module('profileApp', [
-	'ngRoute',
 	'profileControllers',
 	'loginController'
 ]);
 
-
+/*
 
 app.config(['$routeProvider',
   function($routeProvider) {
@@ -30,3 +29,4 @@ app.config(['$routeProvider',
         redirectTo: '/login'
       });
 }]);
+*/

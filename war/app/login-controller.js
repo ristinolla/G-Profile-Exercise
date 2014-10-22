@@ -11,7 +11,7 @@ var loginController = angular.module('loginController', []);
 
 loginController.controller('LoginCtrl', function ($scope, ApiService, OauthService) {
 
-  $scope.isSignedIn = OauthService.isSignedIn;
+  $scope.isSignedIn = undefined;
   $scope.immediateFailed = false;
   $scope.authResult = {};
   $scope.errorMessage = false;
@@ -36,7 +36,7 @@ loginController.controller('LoginCtrl', function ($scope, ApiService, OauthServi
   // Makes sure processAuth is called only once.
   $scope.signIn = function( authResult ) {
     // Describe what this does
-    console.log(this);
+    console.log("this");
     $scope.$apply(function() {
 
       $scope.authResult = authResult;
@@ -72,7 +72,7 @@ loginController.controller('LoginCtrl', function ($scope, ApiService, OauthServi
   // TODO: Clientid retrieved from clients_secrets.json, this is not dynamic...
   $scope.renderSignIn = function() {
     return gapi.signin.render('gPlusSignIn', {
-      'callback': $scope.signIn,
+      'callback': 'signIn()',
       'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
       'requestvisibleactions': 'http://schemas.google.com/AddActivity',
       //'scope': 'https://www.googleapis.com/auth/plus.login',
