@@ -82,7 +82,7 @@
  	<section class="block" ng-if="people.items">
 		<h3>Friends</h3>
 		<ul class="people-list">
-			<li ng-repeat="person in people.items">
+			<li ng-repeat="person in people.items | limitTo:10">
 				<a ng-href="{{ person.url }}" alt="{{ person.displayName }}\'s profile"><img ng-src="{{ person.image.url }}"></a>
 			</li>
 		</ul>

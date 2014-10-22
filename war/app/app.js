@@ -3,8 +3,7 @@
 
 **/
 var app = angular.module('profileApp', [
-	'profileControllers',
-	'loginController'
+	'profileControllers'
 ]);
 
 /*
