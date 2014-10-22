@@ -51,5 +51,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>ProfileServlet</servlet-name>
 		<url-pattern>/api/profile</url-pattern>
 	</servlet-mapping>
+	
+	
 
 </web-app>

@@ -1,0 +1,14 @@
+/*
+ * Main .scss file that is just a list of style categories
+ * Note: Pinkie swear that no UI libraries were used.
+*/
+
+
+@import "utilities/_normalize"; // similar to normalize, but self made this time
+@import "utilities/_variables";
+@import "utilities/_globals";
+
+@import "components/_layout";
+@import "components/_typography";
+@import "components/_buttons";
+@import "components/_images";

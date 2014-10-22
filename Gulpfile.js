@@ -15,6 +15,7 @@ var gulp = require('gulp'),
 
 gulp.task('styles', function () {
   return gulp.src('war/assets/scss/main.scss')
+    .pipe(plumber())
     .pipe(sass({ style: 'expanded', }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('war/assets/css'))
@@ -31,7 +32,8 @@ gulp.task('scripts', function () {
       'war/app/app.js',
 			'war/app/api-service.js',
       'war/app/oauth-service.js',
-      'war/app/controller.js'
+      'war/app/login-controller.js',
+      'war/app/profile-controller.js'
     ])
     .pipe(plumber())
     .pipe(jshint('.jshintrc'))
@@ -48,8 +50,8 @@ gulp.task('scripts', function () {
 //Library sripts
 gulp.task('script-lib', function () {
   return gulp.src([
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular-route/angular-route.min.js'
+      'war/assets/vendor/angular/angular.min.js',
+      'war/assets/vendor/angular-route/angular-route.min.js',
     ])
     .pipe(concat('lib.js'))
     .pipe(gulp.dest('war/assets/vendor'))

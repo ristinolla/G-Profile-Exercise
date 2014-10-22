@@ -1,0 +1,37 @@
+// globals.scss
+// --------------
+
+*{
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 13px;
+	@media screen and (min-width: $break-sm){
+		//font-size: $base-size;
+		font-size: 16px;
+	}
+}
+
+
+.hide-text {
+
+}
+
+// Nifty image replacement that hides text but keeps it readable
+.ir {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  overflow: hidden;
+  &:before {
+    content: "";
+    display: block;
+    height: 150%;
+    width: 0;
+  }
+}
+
+
+.image-round {
+	border-radius: 100%;
+}

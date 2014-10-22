@@ -8,10 +8,11 @@ app.service("ApiService", function($http, $q){
 	// --------------
 	// Public Methods
 	// --------------
+	var ApiService = {};
 
 	// POST requests login information to the server,
 	// where ConnectServlet.java handles the server connection to google
-	function connect( authResult ){
+	ApiService.connect = function( authResult ){
 		var request = $http({
 					method: "post",
 					url: "/api/connect?state=" + STATE,
@@ -20,11 +21,11 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// POSTS the disconnect method
-	function disconnect( authResult ){
+	ApiService.disconnect = function( authResult ){
 		console.log('Disconnext in services');
 		var request = $http({
 					method: "post",
@@ -34,13 +35,13 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// GET Profile from java backend
 	// Returns json object from /api/profile
 	// on error 401 "Current user not connected." display error message
-	function getProfile( authResult ){
+	ApiService.getProfile = function( authResult ){
 		console.log('ApiService.getProfile');
 		var request = $http({
 					method: "get",
@@ -49,13 +50,13 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// GET Profile from java backend
 	// Returns json object from /api/people
 	// on error 401 "Current user not connected." display error message
-	function getPeople( authResult ){
+	ApiService.getPeople = function( authResult ){
 		console.log('ApiService.getPeople');
 		var request = $http({
 					method: "get",
@@ -64,7 +65,7 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 
@@ -88,10 +89,5 @@ app.service("ApiService", function($http, $q){
 				return( response.data );
 	}
 
-	return({
-		connect: connect,
-		disconnect: disconnect,
-		getProfile: getProfile,
-		getPeople: getPeople
-	});
+	return ApiService;
 });

@@ -2,7 +2,34 @@
 
 
 **/
-var app = angular.module('profileApp', []);
+var app = angular.module('profileApp', [
+	'ngRoute',
+	'profileControllers',
+	'loginController'
+]);
+
+
+
+app.config(['$routeProvider',
+  function($routeProvider) {
+		console.log('Routerprovider started');
+
+    $routeProvider.
+      when('/profile', {
+        templateUrl: 'partials/profile.html',
+        controller: 'ProfileCtrl'
+      }).
+
+			when('/login', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
+      }).
+
+
+      otherwise({
+        redirectTo: '/login'
+      });
+}]);
 
 /*
  * Api Service
@@ -14,10 +41,11 @@ app.service("ApiService", function($http, $q){
 	// --------------
 	// Public Methods
 	// --------------
+	var ApiService = {};
 
 	// POST requests login information to the server,
 	// where ConnectServlet.java handles the server connection to google
-	function connect( authResult ){
+	ApiService.connect = function( authResult ){
 		var request = $http({
 					method: "post",
 					url: "/api/connect?state=" + STATE,
@@ -26,11 +54,11 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// POSTS the disconnect method
-	function disconnect( authResult ){
+	ApiService.disconnect = function( authResult ){
 		console.log('Disconnext in services');
 		var request = $http({
 					method: "post",
@@ -40,13 +68,13 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// GET Profile from java backend
 	// Returns json object from /api/profile
 	// on error 401 "Current user not connected." display error message
-	function getProfile( authResult ){
+	ApiService.getProfile = function( authResult ){
 		console.log('ApiService.getProfile');
 		var request = $http({
 					method: "get",
@@ -55,13 +83,13 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 	// GET Profile from java backend
 	// Returns json object from /api/people
 	// on error 401 "Current user not connected." display error message
-	function getPeople( authResult ){
+	ApiService.getPeople = function( authResult ){
 		console.log('ApiService.getPeople');
 		var request = $http({
 					method: "get",
@@ -70,7 +98,7 @@ app.service("ApiService", function($http, $q){
 				});
 
 		return (request.then(handleSuccess, handleError ));
-	}
+	};
 
 
 
@@ -94,12 +122,7 @@ app.service("ApiService", function($http, $q){
 				return( response.data );
 	}
 
-	return({
-		connect: connect,
-		disconnect: disconnect,
-		getProfile: getProfile,
-		getPeople: getPeople
-	});
+	return ApiService;
 });
 
 /*
@@ -116,10 +139,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 	// Private Methods
 	// --------------
 
-
-	var immediateFailed = false;
-	var authResult = {};
-
+	var immediateFailed = false,
+	 		authResult = {};
 
 
 	// --------------
@@ -137,6 +158,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 	*/
 	OauthService.processAuth = function( authResult ) {
 
+			console.log('aurg', authResult);
+
 			var deferred = $q.defer();
 
 			if (this.isSignedIn) {
@@ -146,7 +169,6 @@ app.factory("OauthService", function($http, $q, ApiService){
 					message: "Already signed in."
 				});
 			}
-
 			// Access_token is provided by client:plusone.js api.
 			if (authResult.access_token) {
 				this.immediateFailed = false;
@@ -180,6 +202,7 @@ app.factory("OauthService", function($http, $q, ApiService){
 					});
 
 				} else {
+					console.log('severe amount of shit in the fan');
 
 					deferred.resolve({
 						signedIn: false,
@@ -214,13 +237,17 @@ app.factory("OauthService", function($http, $q, ApiService){
 });
 
 /**
- * ProfileCtrl
+ * Login CTRL
  * - Handles the authentication between Google OAUTH and Java Backend
  * Dependencies: ApiServies
  *
  */
 
-app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
+// Login CTRL
+var loginController = angular.module('loginController', []);
+
+
+loginController.controller('LoginCtrl', function ($scope, ApiService, OauthService) {
 
   $scope.isSignedIn = OauthService.isSignedIn;
   $scope.immediateFailed = false;
@@ -247,7 +274,9 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
   // Makes sure processAuth is called only once.
   $scope.signIn = function( authResult ) {
     // Describe what this does
+    console.log(this);
     $scope.$apply(function() {
+
       $scope.authResult = authResult;
 
       OauthService.processAuth(authResult)
@@ -257,7 +286,8 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
           // Tests if signed in worked or not
           if(result.signedIn === true){
             $scope.isSignedIn = true;
-            $scope.showProfile();
+            //$scope.showProfile();
+            //$routerProvider.redirectTo("/profile");
           } else {
             $scope.isSignedIn = false;
             console.log(result.message);
@@ -271,6 +301,7 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
   $scope.handleError = function( result ) {
     // body...
     $scope.errorMessage = result.message;
+    // ggg
   };
 
 
@@ -282,14 +313,15 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
       'callback': $scope.signIn,
       'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
       'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-      'scope': 'https://www.googleapis.com/auth/plus.login',
+      //'scope': 'https://www.googleapis.com/auth/plus.login',
+      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
       'theme': 'dark',
       'cookiepolicy': 'single_host_origin',
       'accesstype': 'offline'
     });
   };
 
-
+/* TODO
   $scope.showProfile = function() {
 
     ApiService.getProfile().then(function( data ){
@@ -302,5 +334,41 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
       $scope.people = data;
     });
   };
+*/
 
 }); // End of controller
+
+/*
+ *
+ *
+ *
+*/
+
+var profileControllers = angular.module('profileControllers', []);
+
+profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthService) {
+
+		$scope.profile = {};
+
+
+		console.log('Profile ctrl');
+
+		if(OauthService.isSignedIn === true){
+			ApiService.getProfile().then(function( data ){
+				console.log('Profile object', data);
+
+				$scope.profile = data;
+				$scope.profile.image.bigUrl = data.image.url.split("?")[0];
+
+			});
+
+			ApiService.getPeople().then(function( data ){
+				console.log('People object', data);
+				$scope.people = data;
+			});
+		} else {
+			console.log('dd');
+		}
+
+
+});

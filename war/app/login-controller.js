@@ -1,11 +1,15 @@
 /**
- * ProfileCtrl
+ * Login CTRL
  * - Handles the authentication between Google OAUTH and Java Backend
  * Dependencies: ApiServies
  *
  */
 
-app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
+// Login CTRL
+var loginController = angular.module('loginController', []);
+
+
+loginController.controller('LoginCtrl', function ($scope, ApiService, OauthService) {
 
   $scope.isSignedIn = OauthService.isSignedIn;
   $scope.immediateFailed = false;
@@ -32,7 +36,9 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
   // Makes sure processAuth is called only once.
   $scope.signIn = function( authResult ) {
     // Describe what this does
+    console.log(this);
     $scope.$apply(function() {
+
       $scope.authResult = authResult;
 
       OauthService.processAuth(authResult)
@@ -42,7 +48,8 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
           // Tests if signed in worked or not
           if(result.signedIn === true){
             $scope.isSignedIn = true;
-            $scope.showProfile();
+            //$scope.showProfile();
+            //$routerProvider.redirectTo("/profile");
           } else {
             $scope.isSignedIn = false;
             console.log(result.message);
@@ -56,6 +63,7 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
   $scope.handleError = function( result ) {
     // body...
     $scope.errorMessage = result.message;
+    // ggg
   };
 
 
@@ -67,14 +75,15 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
       'callback': $scope.signIn,
       'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
       'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-      'scope': 'https://www.googleapis.com/auth/plus.login',
+      //'scope': 'https://www.googleapis.com/auth/plus.login',
+      'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
       'theme': 'dark',
       'cookiepolicy': 'single_host_origin',
       'accesstype': 'offline'
     });
   };
 
-
+/* TODO
   $scope.showProfile = function() {
 
     ApiService.getProfile().then(function( data ){
@@ -87,5 +96,6 @@ app.controller('ProfileCtrl', function ($scope, ApiService, OauthService) {
       $scope.people = data;
     });
   };
+*/
 
 }); // End of controller

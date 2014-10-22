@@ -1,0 +1,19 @@
+<div class="buttons">
+	<span id="signIn" ng-hide="isSignedIn">
+		<span id="gPlusSignIn">{{ renderSignIn() }}</span>
+	</span>
+
+	<span id="signOut" ng-show="isSignedIn">
+		<button id="disconnect" ng-click="disconnect()" >Disconnect your Google account from this app</button>
+	</span>
+
+</div>
+
+<div class="error" ng-show="errorMessage">
+	<p>Please refresh the window or try again later. We are extremely sorry you had to see this.</p>
+	<p>Error message: {{ errorMessage }}</p>
+</div>
+
+<div class="" ng-show="isSignedIn">
+	<a href="#/profile">Show Profile</a>
+</div>

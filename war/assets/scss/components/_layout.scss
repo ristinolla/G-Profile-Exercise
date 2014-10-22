@@ -1,0 +1,52 @@
+// layout.scss
+// --------------
+body {
+	background-color: #efefef;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.container {
+	overflow: hidden;
+}
+
+.content {
+	background-color: white;
+	max-width: 60em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.content .block {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+
+
+// header
+
+
+.header {
+	.header-body {
+	}
+}
+
+.cover-photo {
+	width: 100%;
+}
+
+
+.profile-photo {
+	display: block;
+	width: 40%;
+	img {
+		max-width: 100%;
+	}
+	margin-top: -20%;
+	margin-right: auto;
+	margin-left: auto;
+
+
+}

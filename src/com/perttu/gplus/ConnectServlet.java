@@ -14,6 +14,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.gson.Gson;
 
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  * POST body of request should be the authorization code.
  * Example URI: /connect?state=...&gplus_id=...
  */
+
 public class ConnectServlet extends HttpServlet {
 
   /** TODO: nama vois olla utilsseissakin... **/

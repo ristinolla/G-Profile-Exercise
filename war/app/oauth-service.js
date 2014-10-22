@@ -12,10 +12,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 	// Private Methods
 	// --------------
 
-
-	var immediateFailed = false;
-	var authResult = {};
-
+	var immediateFailed = false,
+	 		authResult = {};
 
 
 	// --------------
@@ -33,6 +31,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 	*/
 	OauthService.processAuth = function( authResult ) {
 
+			console.log('aurg', authResult);
+
 			var deferred = $q.defer();
 
 			if (this.isSignedIn) {
@@ -42,7 +42,6 @@ app.factory("OauthService", function($http, $q, ApiService){
 					message: "Already signed in."
 				});
 			}
-
 			// Access_token is provided by client:plusone.js api.
 			if (authResult.access_token) {
 				this.immediateFailed = false;
@@ -76,6 +75,7 @@ app.factory("OauthService", function($http, $q, ApiService){
 					});
 
 				} else {
+					console.log('severe amount of shit in the fan');
 
 					deferred.resolve({
 						signedIn: false,
