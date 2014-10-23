@@ -272,6 +272,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		$scope.disconnect = function (){
 			OauthService.disconnect( $scope.authResult )
 				.then(function( result ){
+					gapi.auth.signOut();
 					console.log(result);
 					$scope.isSignedIn = false;
 					$scope.profile = {};
@@ -311,29 +312,15 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 			});
 		};
 
+
+		// JIIHAA
 		$scope.login = function(){
 			var additionalParams = {
 		     'callback': $scope.signIn
 		  };
 			gapi.auth.signIn( additionalParams );
-
 		};
 
-		// Renders the Google+ sign in button
-		// Dependencies: https://apis.google.com/js/client:plusone.js
-		// TODO: Clientid retrieved from clients_secrets.json, this is not dynamic...
-		/*$scope.renderSignIn = function() {
-			return gapi.signin.render('gPlusSignIn', {
-				'callback': 'signIn()',
-				'clientid': '391956554891-0spjspmirtm07e9l9tsjl1ntkdpcmle5.apps.googleusercontent.com',
-				'requestvisibleactions': 'http://schemas.google.com/AddActivity',
-				'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
-				'theme': 'dark',
-				'cookiepolicy': 'single_host_origin',
-				'accesstype': 'offline'
-			});
-		};
-		*/
 
 
 
