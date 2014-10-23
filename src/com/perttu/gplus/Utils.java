@@ -55,21 +55,32 @@ public class Utils {
 		  
 	  } 
 	  
+
 	  /*
-	   * Returns the CLIENT_ID string from the previously generated client secret object
+	   * This is the Client ID that you generated in the API Console.
 	   */
 	  public final static String getClientID(){
+
 		  String CLIENT_ID = ((GoogleClientSecrets) getGCredentials()).getWeb().getClientId();
 		  return CLIENT_ID;
 	  }
-	  
+
 	  /*
-	   * Returns CLIENT_SECRET string from client secret object
+	   * This is the Client Secret that you generated in the API Console.
 	   */
 	  public final static String getClientSecret(){
 
 		  String CLIENT_SECRET = ((GoogleClientSecrets) getGCredentials()).getWeb().getClientSecret();
 		  return CLIENT_SECRET;
 	  }
+	  //public final static String CLIENT_SECRET = clientSecrets.getWeb().getClientSecret();
+
+	  /*
+	   * Optionally replace this with your application's name.
+	   */
 	  
+	  public final static String getApplicationName() {
+		  String APPLICATION_NAME = "Gapps Task"; 
+		  return APPLICATION_NAME;
+	  }
 }
