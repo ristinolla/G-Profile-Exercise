@@ -51,13 +51,11 @@ public class Utils {
 		    } catch (IOException e) {
 		      throw new Error("No client_secrets.json found", e);
 		   }
-		   
-		  
 	  } 
 	  
 
 	  /*
-	   * This is the Client ID that you generated in the API Console.
+	   * Returns the CLIENT_ID string from the previously generated client secret object
 	   */
 	  public final static String getClientID(){
 
@@ -66,7 +64,7 @@ public class Utils {
 	  }
 
 	  /*
-	   * This is the Client Secret that you generated in the API Console.
+	   * Returns CLIENT_SECRET string from client secret object
 	   */
 	  public final static String getClientSecret(){
 
@@ -76,11 +74,11 @@ public class Utils {
 	  //public final static String CLIENT_SECRET = clientSecrets.getWeb().getClientSecret();
 
 	  /*
-	   * Optionally replace this with your application's name.
+	   * Returns Application name
 	   */
 	  
 	  public final static String getApplicationName() {
-		  String APPLICATION_NAME = "Gapps Task"; 
+		  String APPLICATION_NAME = "G+ Profile Exercise"; 
 		  return APPLICATION_NAME;
 	  }
 }
