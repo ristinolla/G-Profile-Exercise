@@ -45,8 +45,6 @@ public class MainServlet extends HttpServlet {
           .useDelimiter("\\A").next()
           .replaceAll("[{]{2}\\s*CLIENT_ID\\s*[}]{2}", Utils.getClientID())
           .replaceAll("[{]{2}\\s*STATE\\s*[}]{2}", state)
-          .replaceAll("[{]{2}\\s*APPLICATION_NAME\\s*[}]{2}",
-              Utils.getApplicationName() )
           .toString());
       response.setStatus(HttpServletResponse.SC_OK);
 
