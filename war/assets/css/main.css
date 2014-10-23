@@ -434,19 +434,32 @@ body {
 }
 
 .container {
-  overflow: hidden;
-}
-
-.content {
   background-color: white;
   max-width: 60em;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 }
 
 .content .block {
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.login-dialog {
+  text-align: center;
+  padding: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 30em;
+}
+.login-dialog button {
+  margin: 2em;
+}
+
+.logout-dialog {
+  text-align: center;
+  padding: 2em;
 }
 
 .cover-photo {
@@ -471,7 +484,10 @@ body {
 }
 
 h1 {
-  margin: 0.4em 0 0;
+  margin-top: 0.4em;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 0;
 }
 
 h2 {
@@ -512,4 +528,14 @@ a {
 
 .icon {
   display: none;
+}
+
+button {
+  padding: 1em;
+  border-radius: 0.5em;
+  border: none;
+  outline: none;
+  background-color: #27a4c2;
+  color: white;
+  font-weight: bold;
 }

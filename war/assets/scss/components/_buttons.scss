@@ -1,2 +1,15 @@
 // buttons.scss
 // --------------
+
+button {
+	padding: 1em;
+
+	border-radius: 0.5em;
+	border: none;
+	outline: none;
+
+	background-color: rgb(39, 164, 194);
+
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
