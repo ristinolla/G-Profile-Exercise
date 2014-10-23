@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 gulp.task('styles', function () {
-  return gulp.src('war/assets/scss/main.scss')
+  return gulp.src('war/src/scss/main.scss')
     .pipe(plumber())
     .pipe(sass({ style: 'expanded', }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -29,11 +29,11 @@ gulp.task('styles', function () {
 //Scripts
 gulp.task('scripts', function () {
   return gulp.src([
-      'war/app/app.js',
-			'war/app/api-service.js',
-      'war/app/oauth-service.js',
-      'war/app/login-controller.js',
-      'war/app/profile-controller.js'
+      'war/src/js/app.js',
+			'war/src/js/api-service.js',
+      'war/src/js/oauth-service.js',
+      'war/src/js/login-controller.js',
+      'war/src/js/profile-controller.js'
     ])
     .pipe(plumber())
     .pipe(jshint('.jshintrc'))
@@ -105,11 +105,5 @@ gulp.task('watch', function() {
   gulp.watch('war/assets/scss/**/*.scss', ['styles']);
   gulp.watch('war/app/**/*.js', ['scripts']);
   gulp.watch('war/src/img/**/*', ['images']);
-
-  // Create LiveReload server
-  livereload.listen();
-
-  // Watch any files in dist/, reload on change
-  gulp.watch(['war/assets/**', 'app.html']).on('change', livereload.changed);
 
 });
