@@ -9,5 +9,7 @@
 
 /war/WEB-INF/classes
 /war/WEB-INF/lib
+/war/client_secrets.json
+
 
 /reference
