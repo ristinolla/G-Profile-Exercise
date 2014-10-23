@@ -53,6 +53,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 			// this neglets the later.
 			// http://stackoverflow.com/questions/23020733/google-login-hitting-twice
 			if(authResult.status.method !== "PROMPT"){
+				console.log('not promt, but immediate?', authResult.status);
 				return;
 			}
 
