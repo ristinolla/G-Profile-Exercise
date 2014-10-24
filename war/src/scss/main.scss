@@ -3,12 +3,14 @@
  * Note: Pinkie swear that no UI libraries were used.
 */
 
-
 @import "utilities/_normalize"; // similar to normalize, but self made this time
 @import "utilities/_variables";
-@import "utilities/_globals";
+@import "utilities/_helpers";
 
 @import "components/_layout";
 @import "components/_typography";
+@import "components/_icons";
 @import "components/_buttons";
 @import "components/_images";
+
+@import "sections/_header";

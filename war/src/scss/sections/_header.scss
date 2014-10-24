@@ -1,0 +1,36 @@
+// header
+.header {
+	color: white;
+	text-align: center;
+	padding: 3em 2em 4em;
+
+	background-position: center center;
+	background-size: cover;
+	position: relative;
+	overflow: hidden;
+	&:after {
+		content: '';
+		display: block;
+		width: 160%;
+		height: 6em;
+		bottom: -5em;
+		left: -30%;
+		background: rgb(255, 255, 255);
+		position: absolute;
+		border-radius: 100%;
+	}
+}
+
+.cover-photo {
+	display: none;
+}
+
+
+.profile-photo {
+
+	margin-top: 0;
+	img {
+		width: 40%;
+	}
+
+}

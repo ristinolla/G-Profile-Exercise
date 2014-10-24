@@ -1,6 +1,5 @@
 // I decided to use icomoon and their icons instead   design my own.
 // However if I had designed my own, I still would have converted them to icon font through icomoon.
-// Following css is straigt out of icomoon. The PNG fallbacks are made by me.
 
 @font-face {
 	font-family: 'icomoon';
@@ -13,7 +12,12 @@
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+	content: "";
+}
+.fontface [class^="icon-"],
+.fontface [class*=" icon-"] {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;

@@ -6,6 +6,7 @@ var app = angular.module('profileApp', [
 	'profileControllers'
 ]);
 
+
 /*
 
 app.config(['$routeProvider',

@@ -5,22 +5,38 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	@extend .margins-off;
+
+	// this really does controll the whole layout...
+	font-size: 13px;
+	@media screen and (min-width: $break-sm){
+		//font-size: $base-size;
+		font-size: 16px;
+	}
 }
 
 
+// Tama on oikeastaan aika nappara maaritelma =)
 //http://alistapart.com/article/axiomatic-css-and-lobotomized-owls
 * + * {
 	margin-top: 1.5em;
 }
 
-
-
 .row > * {
-	margin-top: 0;
+	@media screen and (min-width: $break-sm) {
+		margin-top: 0;
+	}
 }
 
 .margins-off > * {
 	margin-top: 0;
+}
+
+.row:after {
+	// http://css-tricks.com/snippets/css/clear-fix/ only ie8 up.
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .container {
@@ -37,8 +53,11 @@ body {
 }
 
 .half {
-	width: 50%;
-	float: left;
+
+	@media screen and (min-width: $break-sm) {
+			width: 50%;
+			float: left;
+	}
 }
 
 
@@ -61,26 +80,33 @@ body {
 	padding: 2em;
 }
 
-// header
-.header {
-	.header-body {
+
+
+
+.sneakpeak {
+	height: 2.5em;
+	overflow: hidden;
+	position: relative;
+	transition: all 0.5s;
+ 	&:after {
+		content: '';
+		display: block;
+
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+
+		background: rgb(255, 255, 255);
+		background: linear-gradient(to bottom, rgba(255,255,255,0.10) 0%,rgba(255,255,255,1) 100%);
+
+		transition: all 3.5s;
 	}
-}
-
-.cover-photo {
-	width: 100%;
-}
-
-
-.profile-photo {
-	display: block;
-	width: 40%;
-	img {
-		max-width: 100%;
+	&.reveal {
+		height: auto;
+		transition: all 3.5s;
+		&:after {
+			background: none;
+		}
 	}
-	margin-top: -20%;
-	margin-right: auto;
-	margin-left: auto;
-
-
 }

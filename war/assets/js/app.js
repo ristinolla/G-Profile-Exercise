@@ -6,6 +6,7 @@ var app = angular.module('profileApp', [
 	'profileControllers'
 ]);
 
+
 /*
 
 app.config(['$routeProvider',
@@ -251,13 +252,29 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		$scope.profile = {};
 		$scope.people = {};
 
+		// Returns current city if there is one
+		// if none, then returns false
+		function getCurrentCity( profile ){
+			var places = profile.placesLived;
+			if(typeof places === 'undefined' ){
+				return false;
+			}
+
+			for(var i in places){
+				if(places[i].primary){
+					return places[i].value;
+				}
+			}
+			return undefined;
+		}
+
 
 		$scope.showProfile = function() {
 			ApiService.getProfile().then(function( data ){
 				console.log('Profile object', data);
 				$scope.profile = data;
 				$scope.profile.image.bigUrl = data.image.url.split("?")[0];
-
+				$scope.profile.homeTown = getCurrentCity( $scope.profile );
 			});
 
 			ApiService.getPeople().then(function( data ){
@@ -324,5 +341,10 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 
 
 
+		// Reveal
+		$scope.revealContent = function(obj, $event){
+			classie.addClass( $event.srcElement, 'hide' );
+			classie.removeClass(document.getElementById( obj ), 'sneakpeak');
+		};
 
 });

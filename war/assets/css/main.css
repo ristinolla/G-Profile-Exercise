@@ -401,15 +401,6 @@ th {
   box-sizing: border-box;
 }
 
-body {
-  font-size: 13px;
-}
-@media screen and (min-width: 30em) {
-  body {
-    font-size: 16px;
-  }
-}
-
 .ir {
   background-color: transparent;
   border: 0;
@@ -426,23 +417,41 @@ body {
   border-radius: 100%;
 }
 
+.hide {
+  display: none;
+}
+
 body {
   background-color: #efefef;
   margin: 0;
   padding: 0;
   width: 100%;
+  font-size: 13px;
+}
+@media screen and (min-width: 30em) {
+  body {
+    font-size: 16px;
+  }
 }
 
 * + * {
   margin-top: 1.5em;
 }
 
-.row > * {
+@media screen and (min-width: 30em) {
+  .row > * {
+    margin-top: 0;
+  }
+}
+
+.margins-off > *, body > * {
   margin-top: 0;
 }
 
-.margins-off > * {
-  margin-top: 0;
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .container {
@@ -458,9 +467,11 @@ body {
   padding-right: 1em;
 }
 
-.half {
-  width: 50%;
-  float: left;
+@media screen and (min-width: 30em) {
+  .half {
+    width: 50%;
+    float: left;
+  }
 }
 
 .login-dialog {
@@ -479,19 +490,33 @@ body {
   padding: 2em;
 }
 
-.cover-photo {
-  width: 100%;
+.sneakpeak {
+  height: 2.5em;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: all 0.5s;
+          transition: all 0.5s;
 }
-
-.profile-photo {
+.sneakpeak:after {
+  content: '';
   display: block;
-  width: 40%;
-  margin-top: -20%;
-  margin-right: auto;
-  margin-left: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: white;
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, white 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, white 100%);
+  -webkit-transition: all 3.5s;
+          transition: all 3.5s;
 }
-.profile-photo img {
-  max-width: 100%;
+.sneakpeak.reveal {
+  height: auto;
+  -webkit-transition: all 3.5s;
+          transition: all 3.5s;
+}
+.sneakpeak.reveal:after {
+  background: none;
 }
 
 body {
@@ -523,6 +548,14 @@ a {
   margin: 0;
 }
 
+li + li {
+  margin-top: 1em;
+}
+
+.inline-list li {
+  margin-top: 0;
+}
+
 .people-list {
   list-style: none;
   padding: 0;
@@ -533,15 +566,162 @@ a {
 
 .short-info {
   list-style: none;
-  padding-left: 3em;
+  padding-left: 2em;
   color: #717171;
 }
 .short-info .icon {
-  margin-left: 3em;
+  font-size: 1.1em;
+  margin-right: 0.5em;
+  margin-left: -1.7em;
 }
 
-.icon {
-  display: none;
+.desc-list {
+  list-style: none;
+  padding-left: 0;
+}
+.desc-list li * {
+  margin-top: 0;
+}
+.desc-list .name {
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon/icomoon.eot?-yzpvlf");
+  src: url("../fonts/icomoon/icomoon.eot?#iefix-yzpvlf") format("embedded-opentype"), url("../fonts/icomoon/icomoon.woff?-yzpvlf") format("woff"), url("../fonts/icomoon/icomoon.ttf?-yzpvlf") format("truetype"), url("../fonts/icomoon/icomoon.svg?-yzpvlf#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  content: "";
+}
+
+.fontface [class^="icon-"],
+.fontface [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-phone:before {
+  content: "\e600";
+}
+
+.icon-mobile:before {
+  content: "\e601";
+}
+
+.icon-mail:before {
+  content: "\e602";
+}
+
+.icon-paperplane:before {
+  content: "\e603";
+}
+
+.icon-user:before {
+  content: "\e604";
+}
+
+.icon-users:before {
+  content: "\e605";
+}
+
+.icon-location:before {
+  content: "\e606";
+}
+
+.icon-map:before {
+  content: "\e607";
+}
+
+.icon-house:before {
+  content: "\e608";
+}
+
+.icon-link:before {
+  content: "\e609";
+}
+
+.icon-cog:before {
+  content: "\e60a";
+}
+
+.icon-graduation:before {
+  content: "\e60b";
+}
+
+.icon-briefcase:before {
+  content: "\e60c";
+}
+
+.icon-suitcase:before {
+  content: "\e60d";
+}
+
+.icon-logout:before {
+  content: "\e60e";
+}
+
+.icon-github:before {
+  content: "\e60f";
+}
+
+.icon-flickr:before {
+  content: "\e610";
+}
+
+.icon-vimeo:before {
+  content: "\e611";
+}
+
+.icon-twitter:before {
+  content: "\e612";
+}
+
+.icon-facebook:before {
+  content: "\e613";
+}
+
+.icon-googleplus:before {
+  content: "\e614";
+}
+
+.icon-pinterest:before {
+  content: "\e615";
+}
+
+.icon-tumblr:before {
+  content: "\e616";
+}
+
+.icon-linkedin:before {
+  content: "\e617";
+}
+
+.icon-dribbble:before {
+  content: "\e618";
+}
+
+.icon-lastfm:before {
+  content: "\e619";
+}
+
+.icon-spotify:before {
+  content: "\e61a";
+}
+
+.icon-skype:before {
+  content: "\e61b";
 }
 
 button {
@@ -552,4 +732,36 @@ button {
   background-color: #ed5825;
   color: white;
   font-weight: bold;
+}
+
+.header {
+  color: white;
+  text-align: center;
+  padding: 3em 2em 4em;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+.header:after {
+  content: '';
+  display: block;
+  width: 160%;
+  height: 6em;
+  bottom: -5em;
+  left: -30%;
+  background: white;
+  position: absolute;
+  border-radius: 100%;
+}
+
+.cover-photo {
+  display: none;
+}
+
+.profile-photo {
+  margin-top: 0;
+}
+.profile-photo img {
+  width: 40%;
 }

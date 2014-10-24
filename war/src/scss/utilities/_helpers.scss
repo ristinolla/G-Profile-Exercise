@@ -6,16 +6,6 @@
 }
 
 
-
-body {
-	font-size: 13px;
-	@media screen and (min-width: $break-sm){
-		//font-size: $base-size;
-		font-size: 16px;
-	}
-}
-
-
 .hide-text {
 
 }
@@ -36,4 +26,8 @@ body {
 
 .image-round {
 	border-radius: 100%;
+}
+
+.hide {
+	display: none;
 }

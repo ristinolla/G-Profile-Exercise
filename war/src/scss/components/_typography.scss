@@ -36,6 +36,15 @@ a {
 // LISTS
 // -----
 
+li + li {
+	margin-top: 1em;
+}
+
+.inline-list {
+	li {
+		margin-top: 0;
+	}
+}
 
 .people-list {
 	list-style: none;
@@ -49,19 +58,26 @@ a {
 
 .short-info {
 	list-style:none;
-	padding-left: 3em;
+	padding-left: 2em;
 	color: $muted;
 
 	.icon {
-		margin-left: 3em;
+		font-size: 1.1em;
+		margin-right: 0.5em;
+		margin-left: -1.7em;
 	}
 
 }
 
-// ICONS
-// -----
+.desc-list {
+	list-style: none;
+	padding-left: 0;
 
-.icon {
-	display: none;
+	li * {
+		margin-top: 0;
+	}
+	.name {
+		font-weight: bold;
+	}
 
 }
