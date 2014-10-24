@@ -1,0 +1,115 @@
+// I decided to use icomoon and their icons instead   design my own.
+// However if I had designed my own, I still would have converted them to icon font through icomoon.
+// Following css is straigt out of icomoon. The PNG fallbacks are made by me.
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon/icomoon.eot?-yzpvlf');
+	src:url('../fonts/icomoon/icomoon.eot?#iefix-yzpvlf') format('embedded-opentype'),
+		url('../fonts/icomoon/icomoon.woff?-yzpvlf') format('woff'),
+		url('../fonts/icomoon/icomoon.ttf?-yzpvlf') format('truetype'),
+		url('../fonts/icomoon/icomoon.svg?-yzpvlf#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-phone:before {
+	content: "\e600";
+}
+.icon-mobile:before {
+	content: "\e601";
+}
+.icon-mail:before {
+	content: "\e602";
+}
+.icon-paperplane:before {
+	content: "\e603";
+}
+.icon-user:before {
+	content: "\e604";
+}
+.icon-users:before {
+	content: "\e605";
+}
+.icon-location:before {
+	content: "\e606";
+}
+.icon-map:before {
+	content: "\e607";
+}
+.icon-house:before {
+	content: "\e608";
+}
+.icon-link:before {
+	content: "\e609";
+}
+.icon-cog:before {
+	content: "\e60a";
+}
+.icon-graduation:before {
+	content: "\e60b";
+}
+.icon-briefcase:before {
+	content: "\e60c";
+}
+.icon-suitcase:before {
+	content: "\e60d";
+}
+.icon-logout:before {
+	content: "\e60e";
+}
+.icon-github:before {
+	content: "\e60f";
+}
+.icon-flickr:before {
+	content: "\e610";
+}
+.icon-vimeo:before {
+	content: "\e611";
+}
+.icon-twitter:before {
+	content: "\e612";
+}
+.icon-facebook:before {
+	content: "\e613";
+}
+.icon-googleplus:before {
+	content: "\e614";
+}
+.icon-pinterest:before {
+	content: "\e615";
+}
+.icon-tumblr:before {
+	content: "\e616";
+}
+.icon-linkedin:before {
+	content: "\e617";
+}
+.icon-dribbble:before {
+	content: "\e618";
+}
+.icon-lastfm:before {
+	content: "\e619";
+}
+.icon-spotify:before {
+	content: "\e61a";
+}
+.icon-skype:before {
+	content: "\e61b";
+}
+
+// PNG fall backs

@@ -16,3 +16,7 @@ Main modifications / Additions
 ## Front-end
 
 Badass angular stuff
+
+Icons: https://icomoon.io/
+
+I decided to use icomoon and their icons, contrary to design my own. However if i would have designed my own I still would have converted them to icon font through icomoon.
