@@ -50,8 +50,9 @@ gulp.task('scripts', function () {
 //Library sripts
 gulp.task('script-lib', function () {
   return gulp.src([
-      'war/assets/vendor/angular/angular.min.js',
-      'war/assets/vendor/angular-route/angular-route.min.js',
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular-route/angular-route.min.js',
+      'war/src/vendor/classie/classie.js'
     ])
     .pipe(concat('lib.js'))
     .pipe(gulp.dest('war/assets/vendor'))
