@@ -33,6 +33,9 @@ a {
 
 }
 
+// LISTS
+// -----
+
 
 .people-list {
 	list-style: none;
@@ -48,9 +51,7 @@ a {
 	list-style:none;
 	padding-left: 3em;
 	color: $muted;
-	li {
-		margin-bottom: 0.5em;
-	}
+
 	.icon {
 		margin-left: 3em;
 	}

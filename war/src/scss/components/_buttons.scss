@@ -2,13 +2,13 @@
 // --------------
 
 button {
-	padding: 1em;
+	padding: 1em 2em;
 
 	border-radius: 0.5em;
 	border: none;
 	outline: none;
 
-	background-color: rgb(39, 164, 194);
+	background-color: $gplus-red;
 
 	color: rgb(255, 255, 255);
 	font-weight: bold;

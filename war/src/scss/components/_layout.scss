@@ -8,6 +8,21 @@ body {
 }
 
 
+//http://alistapart.com/article/axiomatic-css-and-lobotomized-owls
+* + * {
+	margin-top: 1.5em;
+}
+
+
+
+.row > * {
+	margin-top: 0;
+}
+
+.margins-off > * {
+	margin-top: 0;
+}
+
 .container {
 	background-color: white;
 	max-width: 60em;
@@ -20,6 +35,12 @@ body {
 	padding-left: 1em;
 	padding-right: 1em;
 }
+
+.half {
+	width: 50%;
+	float: left;
+}
+
 
 
 //

@@ -433,6 +433,18 @@ body {
   width: 100%;
 }
 
+* + * {
+  margin-top: 1.5em;
+}
+
+.row > * {
+  margin-top: 0;
+}
+
+.margins-off > * {
+  margin-top: 0;
+}
+
 .container {
   background-color: white;
   max-width: 60em;
@@ -444,6 +456,11 @@ body {
 .content .block {
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.half {
+  width: 50%;
+  float: left;
 }
 
 .login-dialog {
@@ -519,9 +536,6 @@ a {
   padding-left: 3em;
   color: #717171;
 }
-.short-info li {
-  margin-bottom: 0.5em;
-}
 .short-info .icon {
   margin-left: 3em;
 }
@@ -531,11 +545,11 @@ a {
 }
 
 button {
-  padding: 1em;
+  padding: 1em 2em;
   border-radius: 0.5em;
   border: none;
   outline: none;
-  background-color: #27a4c2;
+  background-color: #ed5825;
   color: white;
   font-weight: bold;
 }

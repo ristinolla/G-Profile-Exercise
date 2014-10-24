@@ -2,7 +2,6 @@
 	<img class="cover-photo" ng-src="{{ profile.cover.coverPhoto.url }}" alt="Cover photo">
 
 
-
 	<header class="header block">
 		<div class="profile-photo">
 			<img class="image-round" ng-src="{{ profile.image.bigUrl }}?sz=250" >
@@ -26,61 +25,58 @@
 		</div>
 	</header>
 
-
-
-	<section class="block" ng-if="profile.aboutMe">
-		<h3>About me</h3>
-		<p class="description">{{ profile.aboutMe }}</p>
-		<div ng-if="profile.skills">
-			<h4>Skills</h4>
-			<p>{{ profile.skills }}</p>
-		</div>
-	</section>
+	<div class="row">
+		<section class="block" ng-if="profile.aboutMe">
+			<h3>About me</h3>
+			<p class="description">{{ profile.aboutMe }}</p>
+		</section>
 
 
 
-	<section class="block" ng-if="profile.url">
-		<h3>Contact info</h3>
-		<ul class="short-info">
-			<li ng-repeat="email in profile.emails">
-					<a ng-href="mailto:{{ email.value }}">{{ email.value }}</a>
+		<section class="block" ng-if="profile.url">
+			<h3>Contact info</h3>
+			<ul class="short-info">
+				<li ng-repeat="email in profile.emails">
+						<a ng-href="mailto:{{ email.value }}">{{ email.value }}</a>
+				</li>
+				<li>
+						<a ng-href="mailto:{{ profile.url }}" alt="{{ profile.name.givenName}}\'s Google+ Profile">Google+ Profile</a>
+				</li>
+				<li ng-repeat="url in profile.urls">
+						<a ng-href="{{ url.value }}" alt="{{ url.label }}">{{ url.label }}</a>
+				</li>
+
+			</ul>
+		</section>
+	</div>
+
+
+	<div class="row">
+		<section class="block half" ng-if="profile.organizations">
+			<h3>Work</h3>
+			<li ng-repeat="company in profile.organizations | orderBy: startDate : reverse | filter : {type: 'work'}">
+				<span>{{ company.title }} at {{ company.name }}</span>
 			</li>
-			<li>
-					<a ng-href="mailto:{{ profile.url }}" alt="{{ profile.name.givenName}}\'s Google+ Profile">Google+ Profile</a>
+		</section>
+
+
+	  <section class="block half" ng-if="profile.organizations">
+			<h3>Occupation</h3>
+			<li ng-repeat="school in profile.organizations | orderBy : startDate | filter : {type: 'school'}">
+				<span>{{ school.title }} at {{ school.name }}</span>
 			</li>
-			<li ng-repeat="url in profile.urls">
-					<a ng-href="{{ url.value }}" alt="{{ url.label }}">{{ url.label }}</a>
-			</li>
+		</section>
+	</div>
 
-		</ul>
+	<section ng-if="profile.skills">
+		<h3>Skills</h3>
+		<p>{{ profile.skills }}</p>
 	</section>
 
-
-
-	<section class="block" ng-if="profile.organizations">
-		<h3>Work</h3>
-		<li ng-repeat="company in profile.organizations | orderBy: startDate : reverse | filter : {type: 'work'}">
-			<span>{{ company.title }} at {{ company.name }}</span>
-		</li>
-	</section>
-
-
-
-
-
-  <section class="block" ng-if="profile.organizations">
-		<h3>Occupation</h3>
-		<li ng-repeat="school in profile.organizations | orderBy : startDate | filter : {type: 'school'}">
-			<span>{{ school.title }} at {{ school.name }}</span>
-		</li>
-	</section>
-
-
-
- 	<section class="block" ng-if="people.items">
+ 	<section class="block " ng-if="people.items">
 		<h3>Friends</h3>
 		<ul class="people-list">
-			<li ng-repeat="person in people.items | limitTo:10">
+			<li ng-repeat="person in people.items | limitTo:20">
 				<a ng-href="{{ person.url }}" alt="{{ person.displayName }}\'s profile"><img ng-src="{{ person.image.url }}"></a>
 			</li>
 		</ul>

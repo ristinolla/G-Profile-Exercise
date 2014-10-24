@@ -102,8 +102,8 @@ gulp.task('build', ['clean', 'clean-images'], function() {
 // Watch
 gulp.task('watch', function() {
 
-  gulp.watch('war/assets/scss/**/*.scss', ['styles']);
-  gulp.watch('war/app/**/*.js', ['scripts']);
+  gulp.watch('war/src/scss/**/*.scss', ['styles']);
+  gulp.watch('war/src/js/**/*.js', ['scripts']);
   gulp.watch('war/src/img/**/*', ['images']);
 
 });
