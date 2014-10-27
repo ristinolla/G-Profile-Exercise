@@ -21,9 +21,10 @@ This is a repository for [perttu-2-gapps.appspot.com](http://perttu-2-gapps.apps
 **Technologies:**
 - Angular
 - CSS3 magic
-- No jQuery
 - SCSS
-- Responsive design
+- No jQuery or similar
+- Mobile First Responsive design
+- npm, Bower and Gulp for smooth workflow
 
 **Icons:**
 

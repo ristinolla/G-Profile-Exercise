@@ -1,33 +1,34 @@
 /**
-
-
+ Main configuration file for angular app
 **/
+
+
 var app = angular.module('profileApp', [
-	'profileControllers'
+	'ngRoute',
+	'profileControllers',
+	'peopleController'
 ]);
 
-/*
+
 app.config(['$routeProvider',
   function($routeProvider) {
 		console.log('Routerprovider started');
 
     $routeProvider.
       when('/profile', {
-        templateUrl: 'partials/profile.html',
+        templateUrl: 'partials/profile-view.html',
         controller: 'ProfileCtrl'
       }).
 
 			when('/people', {
-        templateUrl: 'partials/login.html',
-        controller: 'People'
+        templateUrl: 'partials/people.html',
+        controller: 'PeopleCtrl'
       }).
-
 
       otherwise({
         redirectTo: '/profile'
       });
 }]);
-*/
 
 /*
  * Api Service
@@ -232,8 +233,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 });
 
 /*
- *
- *
+ * Profile controller
+ * - Handles the login flow too
  *
 */
 
@@ -302,14 +303,19 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		$scope.signIn = function( authResult ) {
 
 			// Callback fired everytime signIn status changes
-			// this neglets the later.
+			// this takes care of the
 			// http://stackoverflow.com/questions/23020733/google-login-hitting-twice
-			if(authResult.status.method !== "PROMPT"){
-				console.log('not promt, but immediate?', authResult.status);
-				return;
+
+			if( authResult.status.method === "AUTO" &&
+					authResult.status.signed_in &&
+					authResult.status.google_logged_in
+				){
+					console.log('ayto');
+					$scope.isSignedIn = true;
+					$scope.showProfile();
+					return;
 			}
 
-			console.log(authResult);
 			$scope.$apply(function() {
 
 				$scope.authResult = authResult;
@@ -376,5 +382,24 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 				}
 			}
 		};
+
+});
+
+/*
+* Profile controller
+* - simple controller to show all peoples in profiles circles
+*
+*/
+
+var peopleController = angular.module('peopleController', []);
+
+peopleController.controller('PeopleCtrl', function($scope, ApiService) {
+
+	$scope.people = {};
+
+	ApiService.getPeople().then(function(data){
+		console.log(data);
+		$scope.people = data;
+	});
 
 });

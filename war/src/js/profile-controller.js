@@ -1,6 +1,6 @@
 /*
- *
- *
+ * Profile controller
+ * - Handles the login flow too
  *
 */
 
@@ -69,14 +69,19 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		$scope.signIn = function( authResult ) {
 
 			// Callback fired everytime signIn status changes
-			// this neglets the later.
+			// this takes care of the
 			// http://stackoverflow.com/questions/23020733/google-login-hitting-twice
-			if(authResult.status.method !== "PROMPT"){
-				console.log('not promt, but immediate?', authResult.status);
-				return;
+
+			if( authResult.status.method === "AUTO" &&
+					authResult.status.signed_in &&
+					authResult.status.google_logged_in
+				){
+					console.log('ayto');
+					$scope.isSignedIn = true;
+					$scope.showProfile();
+					return;
 			}
 
-			console.log(authResult);
 			$scope.$apply(function() {
 
 				$scope.authResult = authResult;

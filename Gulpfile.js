@@ -32,8 +32,8 @@ gulp.task('scripts', function () {
       'war/src/js/app.js',
 			'war/src/js/api-service.js',
       'war/src/js/oauth-service.js',
-      'war/src/js/login-controller.js',
-      'war/src/js/profile-controller.js'
+      'war/src/js/profile-controller.js',
+      'war/src/js/people-controller.js'
     ])
     .pipe(plumber())
     .pipe(jshint('.jshintrc'))
