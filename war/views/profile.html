@@ -1,4 +1,10 @@
+<nav class="nav">
+	<button ng-click="disconnect()">Logout <span class="icon icon-logout"></span></button>
+</nav>
+
 <div class="content" ng-if="profile.displayName">
+
+
 	<header class="header row" style="background-image: url({{ profile.cover.coverPhoto.url }}); height: {{ profile.cover.coverPhoto.height/2 }}px;">
 		<img class="cover-photo" ng-src="{{ profile.cover.coverPhoto.url }}" alt="Cover photo">
 		<div>
@@ -34,7 +40,7 @@
 			<h3>About me</h3>
 			<p ng-if="profile.tagline">{{ profile.tagline }}</p>
 			<p id="about-me" class="description" ng-class="{'sneakpeak': profile.tagline}" ng-bind="profile.aboutMe"></p>
-			<a href="#" ng-if="profile.tagline" class="reveal-btn" ng-click="revealContent('about-me', $event)">Read more</a>
+			<a ng-if="profile.tagline" class="reveal-btn" ng-click="revealContent('about-me', $event)">Read more</a>
 		</section>
 
 
@@ -57,11 +63,11 @@
 	</div>
 
 
-	<div class="row">
+	<div class="row" ng-if="profile.organizations">
 		<section class="block half" ng-if="profile.organizations">
 			<h3>Work</h3>
 			<ul class="desc-list">
-				<li ng-repeat="org in profile.organizations | orderBy: startDate : reverse | filter : {type: 'work'}" ng-include="'partials/org-list-item.html'">
+				<li ng-repeat="org in profile.organizations | orderBy: startDate : reverse | filter : {type: 'work'}" ng-include="'views/org-list-item.html'">
 				</li>
 			</ul>
 			<div ng-if="profile.skills">
@@ -74,23 +80,27 @@
 	  <section class="block half" ng-if="profile.organizations">
 			<h3>Occupation</h3>
 			<ul class="desc-list">
-				<li ng-repeat="org in profile.organizations | orderBy : startDate | filter : {type: 'school'}" ng-include="'partials/org-list-item.html'">
+				<li ng-repeat="org in profile.organizations | orderBy : startDate | filter : {type: 'school'}" ng-include="'views/org-list-item.html'">
 				</li>
 			</ul>
 		</section>
 	</div>
 
-	<div class="row">
-	 	<section class="block " ng-if="people.items">
-			<h3>Friends</h3>
-			<ul class="people-list">
-				<li ng-repeat="person in people.items | orderBy:random | limitTo:9" ng-if="person.url">
-					<a ng-href="{{ person.url }}" alt="{{ person.displayName }}'s profile"><img ng-src="{{ person.image.url }}">
-						<div>{{ person.displayName }}</div>
-					</a>
-				</li>
-			</ul>
-			<a href="/#/people">See all friends..</a>
+	<div class="row" ng-if="people.items">
+	 	<section class="block">
+			<div class="row">
+				<h3>Friends</h3>
+				<ul class="people-list">
+					<li ng-repeat="person in people.items | orderBy:random | limitTo:8" ng-if="person.url">
+						<a ng-href="{{ person.url }}" alt="{{ person.displayName }}'s profile"><img ng-src="{{ person.image.url }}">
+							<div>{{ person.displayName }}</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<a href="/#/people">See all friends..</a>
+			</div>
 		</section>
 	</div>
 

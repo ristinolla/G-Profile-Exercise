@@ -24,42 +24,38 @@ li + li {
 
 	li {
 		display: inline-block;
-		width: 48%;
+		width: 100%;
 		margin-left: 2%;
 		margin-top: 1em;
 
 		float: left;
-
+		@media screen and (min-width: $break-sm){
+			width: 48%;
+		}
 		a {
 			display: inline-block;
 			width: 100%;
 			color: $font-color;
-			min-height: 8em;
+			min-height:	3em;
 			&:hover {
 				color: $brand;
 			}
-			@media screen and (min-width: $break-sm){
-				min-height:	3em;
-			}
 		}
 		div {
-			margin-top: 1em;
+			margin-top: 0.7em;
+
 		}
 
 		img {
 			height: 3em;
 			border-radius: 100%;
-			@media screen and (min-width: $break-sm){
-				margin-right: 1em;
-			}
+			margin-right: 1em;
 		}
 
 		img, div {
-			@media screen and (min-width: $break-sm){
 				// breaking the inception rule.. but hey, some rules are ment to be broken. #rebel
-				float: left;
-				display: inline-block;
-			}
+			display: inline-block;
+			float: left;
 		}
 	}
 }

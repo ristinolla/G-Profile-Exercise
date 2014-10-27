@@ -2,6 +2,8 @@
 <head>
 	<title>Perttu to Gapps</title>
 
+	<base href="/">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<meta name="google-signin-clientid" content="{{ CLIENT_ID }}" />
@@ -10,23 +12,22 @@
 	<meta name="google-signin-cookiepolicy" content="single_host_origin" />
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-	<link href="//fonts.googleapis.com/css?family=Hammersmith+One:400" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
 	<link type="text/css" rel="stylesheet" media="screen" href="assets/css/main.css">
 
+	<script src="https://apis.google.com/js/client:platform.js?onload=render" ></script>
+
 	<script src="assets/vendor/modernizr.min.js"></script>
 	<script src="assets/vendor/lib.js"></script>
 
-	<script src="https://apis.google.com/js/client:platform.js"></script>
 </head>
 
 
 <body>
-<div class="container margins-off" ng-view>
+	<div class="container margins-off" ng-view>
 
-</div>
+	</div>
 
 </body>
 

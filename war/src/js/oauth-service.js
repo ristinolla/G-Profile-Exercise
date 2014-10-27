@@ -86,6 +86,8 @@ app.factory("OauthService", function($http, $q, ApiService){
 			return deferred.promise;
 	}; // end processAuth
 
+
+	// Handles the disconnect side
 	OauthService.disconnect = function(authResult){
 		var deferred = $q.defer();
 

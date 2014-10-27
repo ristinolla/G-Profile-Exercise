@@ -41,7 +41,6 @@ app.service("ApiService", function($http, $q){
 	// Returns json object from /api/profile
 	// on error 401 "Current user not connected." display error message
 	ApiService.getProfile = function( authResult ){
-		console.log('ApiService.getProfile');
 		var request = $http({
 					method: "get",
 					url: "/api/profile",
@@ -56,7 +55,6 @@ app.service("ApiService", function($http, $q){
 	// Returns json object from /api/people
 	// on error 401 "Current user not connected." display error message
 	ApiService.getPeople = function( authResult ){
-		console.log('ApiService.getPeople');
 		var request = $http({
 					method: "get",
 					url: "/api/people",

@@ -6,13 +6,15 @@
 
 var peopleController = angular.module('peopleController', []);
 
-peopleController.controller('PeopleCtrl', function($scope, ApiService) {
+peopleController.controller('PeopleCtrl', function($scope, ApiService, $location) {
 
 	$scope.people = {};
 
 	ApiService.getPeople().then(function(data){
-		console.log(data);
 		$scope.people = data;
+	}, function(response){
+		console.log(response);
+		$location.path('/login');
 	});
 
 });

@@ -1,0 +1,18 @@
+// For navigation
+
+.nav {
+	position: absolute;
+	z-index: 20;
+	right: 0;
+	padding: 1.5em;
+}
+
+.nav a {
+	color: white;
+	.icon {
+		color: white;
+	}
+	padding: 0.4em 1em;
+	border: 1px solid rgba(255,255,255, 0.7);
+	border-radius: 0.4em;
+}
