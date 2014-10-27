@@ -91,6 +91,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 
 		// Handle disconnect from app
 		// This function is triggered when disconnect button is pressed
+		// TODO: this might be better in login-controller...
 		$scope.disconnect = function (){
 			console.log($rootScope.authResult);
 			OauthService.disconnect( $rootScope.authResult )

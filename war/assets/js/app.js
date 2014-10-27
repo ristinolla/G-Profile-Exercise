@@ -267,14 +267,13 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 	// The call back function for the button.
 	var signIn = function( authResult ) {
 
-		$scope.authResult = authResult;
+
 		$rootScope.authResult = authResult;
 		// Autosign in
 		if( authResult.status.method === "AUTO" &&
 				authResult.status.signed_in &&
 				authResult.status.google_logged_in
 			){
-				$scope.isSignedIn = true;
 				$location.path('/profile');
 				return;
 		}
@@ -286,13 +285,16 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 			return;
 		}
 
+		if( !$rootScope.authResult ){
+			$scope.signedIn = false;
+			return;
+		}
+
 		$scope.$apply(function() {
 
-
-			OauthService.processAuth( authResult )
+			OauthService.processAuth( $rootScope.authResult )
 				.then(function( result ){
 					console.log(result);
-
 					// Tests if signed in worked or not
 					if(result.signedIn === true){
 						$scope.isSignedIn = true;
@@ -301,7 +303,6 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 					} else {
 						$scope.isSignedIn = false;
 						console.log(result.message);
-
 					}
 
 				});
@@ -321,15 +322,7 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 	};
 
 
-	// Handle disconnect from app
-	// This function is triggered when disconnect button is pressed
-	$scope.disconnect = function (){
-		OauthService.disconnect( $rootScope.authResult )
-			.then(function( result ){
-				gapi.auth.signOut();
-				$rootScope.isSignedIn = false;
-		});
-	};
+
 
 
 });
@@ -427,6 +420,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 
 		// Handle disconnect from app
 		// This function is triggered when disconnect button is pressed
+		// TODO: this might be better in login-controller...
 		$scope.disconnect = function (){
 			console.log($rootScope.authResult);
 			OauthService.disconnect( $rootScope.authResult )

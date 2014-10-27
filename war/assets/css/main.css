@@ -755,14 +755,20 @@ button {
   padding: 1.5em;
 }
 
-.nav a {
+.nav button {
+  background: transparent;
   color: white;
   padding: 0.4em 1em;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 0.4em;
 }
-.nav a .icon {
+.nav button .icon {
   color: white;
+}
+.nav button:hover {
+  background: #0b9d80;
+  -webkit-transition: background linear 0.4s;
+          transition: background linear 0.4s;
 }
 
 .header {

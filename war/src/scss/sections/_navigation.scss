@@ -7,7 +7,8 @@
 	padding: 1.5em;
 }
 
-.nav a {
+.nav button {
+	background: transparent;
 	color: white;
 	.icon {
 		color: white;
@@ -15,4 +16,9 @@
 	padding: 0.4em 1em;
 	border: 1px solid rgba(255,255,255, 0.7);
 	border-radius: 0.4em;
+
+	&:hover {
+		background: $brand;
+		transition: background linear 0.4s;
+	}
 }
