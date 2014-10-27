@@ -38,6 +38,11 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 				$scope.profile.image.bigUrl = data.image.url.split("?")[0];
 				$scope.profile.homeTown = getCurrentCity( $scope.profile );
 
+				if(!$scope.profile.cover){
+					$scope.profile.coverPhoto.url = '/assets/img/fallback-cover.jpg';
+					$scope.profile.coverPhoto.height = 600;
+				}
+
 				urlTypes();
 
 			}, function(response){
@@ -48,7 +53,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 			ApiService.getPeople().then(function( data ){
 				$scope.people = data;
 			}, function(response){
-
+				console.log('error fetching people',response);
 			});
 		};
 		init();
@@ -92,13 +97,14 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		// Handle disconnect from app
 		// This function is triggered when disconnect button is pressed
 		// TODO: this might be better in login-controller...
+		// TODO: own view?
 		$scope.disconnect = function (){
 			console.log($rootScope.authResult);
 			OauthService.disconnect( $rootScope.authResult )
 				.then(function( result ){
 					gapi.auth.signOut();
-					$rootScope.isSignedIn = false;
-					$location.path('/login');
+					$location.path('/logout');
+
 			});
 		};
 

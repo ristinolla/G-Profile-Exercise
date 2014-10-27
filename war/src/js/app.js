@@ -34,6 +34,10 @@ app.config(['$routeProvider',
 				controller: 'LoginCtrl'
 			}).
 
+			when('/logout', {
+				templateUrl: 'views/logout.html'
+			}).
+
       otherwise({
         redirectTo: '/login'
       });

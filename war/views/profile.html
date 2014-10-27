@@ -4,12 +4,11 @@
 
 <div class="content" ng-if="profile.displayName">
 
-
 	<header class="header row" style="background-image: url({{ profile.cover.coverPhoto.url }}); height: {{ profile.cover.coverPhoto.height/2 }}px;">
 		<img class="cover-photo" ng-src="{{ profile.cover.coverPhoto.url }}" alt="Cover photo">
 		<div>
 			<div class="profile-photo">
-				<img class="image-round" ng-src="{{ profile.image.bigUrl }}?sz=250" >
+				<img class="image-round" ng-src="{{ profile.image.bigUrl }}?sz=220" >
 			</div>
 			<div class="header-body">
 				<h1>{{ profile.displayName }}</h1>
@@ -103,5 +102,4 @@
 			</div>
 		</section>
 	</div>
-
 </div>

@@ -34,6 +34,10 @@ app.config(['$routeProvider',
 				controller: 'LoginCtrl'
 			}).
 
+			when('/logout', {
+				templateUrl: 'views/logout.html'
+			}).
+
       otherwise({
         redirectTo: '/login'
       });
@@ -254,7 +258,6 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 
 
 	var init = function(){
-		console.log("rootscopeauth: ", $rootScope.authResult);
 		if(!$rootScope.authResult){
 			$rootScope.isSignedIn = false;
 		} else if($scope.authResult.status.signed_in){
@@ -267,8 +270,8 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 	// The call back function for the button.
 	var signIn = function( authResult ) {
 
-
 		$rootScope.authResult = authResult;
+
 		// Autosign in
 		if( authResult.status.method === "AUTO" &&
 				authResult.status.signed_in &&
@@ -279,7 +282,7 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 		}
 
 		// Callback fired everytime signIn status changes
-		// this takes care of the
+		// this neglects AUTO prompts with user not signed in
 		// http://stackoverflow.com/questions/23020733/google-login-hitting-twice
 		if( authResult.status.method !== "PROMPT" ) {
 			return;
@@ -289,6 +292,8 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 			$scope.signedIn = false;
 			return;
 		}
+
+		console.log(authResult);
 
 		$scope.$apply(function() {
 
@@ -304,8 +309,8 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 						$scope.isSignedIn = false;
 						console.log(result.message);
 					}
-
 				});
+
 		});
 	};
 
@@ -321,8 +326,20 @@ loginControllers.controller('LoginCtrl', function($scope, $location, ApiService,
 		gapi.auth.signIn( additionalParams );
 	};
 
+	/*
+	// Handle disconnect from app
+	// This function is triggered when disconnect button is pressed
+	// TODO: this might be better in login-controller...
+	$scope.disconnect = function (){
 
+		OauthService.disconnect( $rootScope.authResult )
+			.then(function( result ){
+				gapi.auth.signOut();
 
+				$scope.logoutMessage = result.message;
+			});
+		};
+		*/
 
 
 });
@@ -367,6 +384,11 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 				$scope.profile.image.bigUrl = data.image.url.split("?")[0];
 				$scope.profile.homeTown = getCurrentCity( $scope.profile );
 
+				if(!$scope.profile.cover){
+					$scope.profile.coverPhoto.url = '/assets/img/fallback-cover.jpg';
+					$scope.profile.coverPhoto.height = 600;
+				}
+
 				urlTypes();
 
 			}, function(response){
@@ -377,7 +399,7 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 			ApiService.getPeople().then(function( data ){
 				$scope.people = data;
 			}, function(response){
-
+				console.log('error fetching people',response);
 			});
 		};
 		init();
@@ -421,13 +443,14 @@ profileControllers.controller('ProfileCtrl', function($scope, ApiService, OauthS
 		// Handle disconnect from app
 		// This function is triggered when disconnect button is pressed
 		// TODO: this might be better in login-controller...
+		// TODO: own view?
 		$scope.disconnect = function (){
 			console.log($rootScope.authResult);
 			OauthService.disconnect( $rootScope.authResult )
 				.then(function( result ){
 					gapi.auth.signOut();
-					$rootScope.isSignedIn = false;
-					$location.path('/login');
+					$location.path('/logout');
+
 			});
 		};
 

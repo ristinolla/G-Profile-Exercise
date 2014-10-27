@@ -66,7 +66,7 @@ gulp.task('script-lib', function () {
 // Img
 gulp.task('images',['clean-images'], function() {
   return gulp.src('war/src/img/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
     .pipe(gulp.dest('war/assets/img'))
     .pipe(notify({ message: 'Images task complete' }));
 });
