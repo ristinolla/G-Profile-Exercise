@@ -1,35 +1,39 @@
 <div class="content" ng-if="profile.displayName">
-	<header class="header block" style="background-image: url({{ profile.cover.coverPhoto.url }});">
+	<header class="header row" style="background-image: url({{ profile.cover.coverPhoto.url }}); height: {{ profile.cover.coverPhoto.height/2 }}px;">
 		<img class="cover-photo" ng-src="{{ profile.cover.coverPhoto.url }}" alt="Cover photo">
-		<div class="profile-photo">
-			<img class="image-round" ng-src="{{ profile.image.bigUrl }}?sz=250" >
-		</div>
-		<div class="header-ody">
-			<h1>{{ profile.displayName }}</h1>
-			<h2 class="lead" ng-if="profile.homeTown">{{ profile.occupation }} from {{ profile.homeTown }}</h2>
+		<div>
+			<div class="profile-photo">
+				<img class="image-round" ng-src="{{ profile.image.bigUrl }}?sz=250" >
+			</div>
+			<div class="header-body">
+				<h1>{{ profile.displayName }}</h1>
+				<h2 class="lead" ng-if="profile.homeTown">{{ profile.occupation }} from {{ profile.homeTown }}</h2>
+			</div>
 		</div>
 	</header>
 
-	<section class="block">
-		<ul class="short-info" ng-if="profile.placesLived || profile.organizations">
+	<div class="row">
+		<section class="block short-info">
+			<ul class="short-info" ng-if="profile.placesLived || profile.organizations">
 
-			<li ng-repeat="company in profile.organizations | filter:{primary: true}">
-				<span ng-if="company.type == 'work'" class="icon icon-briefcase"></span>
-				<span ng-if="company.type == 'school'" class="icon icon-graduation"></span>
-				<span> {{ company.title }} in {{ company.name }}</span>
-			</li>
-			<li ng-repeat="place in profile.placesLived | filter:{primary: true}">
-				<span class="icon icon-location"></span>
-				<span>Lives in {{ place.value }}</span>
-			</li>
-		</ul>
-	</section>
+				<li ng-repeat="company in profile.organizations | filter:{primary: true}">
+					<span ng-if="company.type == 'work'" class="icon icon-briefcase"></span>
+					<span ng-if="company.type == 'school'" class="icon icon-graduation"></span>
+					<span> {{ company.title }} at {{ company.name }}</span>
+				</li>
+				<li ng-repeat="place in profile.placesLived | filter:{primary: true}">
+					<span class="icon icon-location"></span>
+					<span>Lives in {{ place.value }}</span>
+				</li>
+			</ul>
+		</section>
+	</div>
 
 	<div class="row">
 		<section class="block half" ng-if="profile.aboutMe">
 			<h3>About me</h3>
 			<p ng-if="profile.tagline">{{ profile.tagline }}</p>
-			<p id="about-me" class="description" ng-class="{'sneakpeak': profile.tagline}">{{ profile.aboutMe }}</p>
+			<p id="about-me" class="description" ng-class="{'sneakpeak': profile.tagline}" ng-bind="profile.aboutMe"></p>
 			<a href="#" ng-if="profile.tagline" class="reveal-btn" ng-click="revealContent('about-me', $event)">Read more</a>
 		</section>
 
@@ -39,13 +43,13 @@
 			<h3>Contact info</h3>
 			<ul class="short-info">
 				<li ng-repeat="email in profile.emails">
-						<span class="icon icon-mail"></span><a ng-href="mailto:{{ email.value }}">{{ email.value }}</a>
+						<a ng-href="mailto:{{ email.value }}"><span class="icon icon-mail"></span> {{ email.value }}</a>
 				</li>
 				<li>
-						<span class="icon icon-googleplus"></span><a ng-href="{{ profile.url }}" alt="{{ profile.name.givenName}}\'s Google+ Profile">Google+ Profile</a>
+						<a ng-href="{{ profile.url }}" alt="{{ profile.name.givenName}}\'s Google+ Profile"><span class="icon icon-googleplus"></span> Google+ Profile</a>
 				</li>
 				<li ng-repeat="url in profile.urls">
-						<span class="icon icon-{{ url.service && url.service || 'link' }}"></span><a ng-href="{{ url.value }}" alt="{{ url.label }}">{{ url.label }}</a>
+						<a ng-href="{{ url.value }}" alt="{{ url.label }}"><span class="icon icon-{{ url.service && url.service || 'link' }}"></span> {{ url.label }}</a>
 				</li>
 
 			</ul>
@@ -61,7 +65,7 @@
 				</li>
 			</ul>
 			<div ng-if="profile.skills">
-				<h3>Skills</h3>
+				<h4>Skills</h4>
 				<p>{{ profile.skills }}</p>
 			</div>
 		</section>
@@ -76,13 +80,17 @@
 		</section>
 	</div>
 
- 	<section class="block " ng-if="people.items">
-		<h3>Friends</h3>
-		<ul class="people-list">
-			<li ng-repeat="person in people.items | limitTo:20">
-				<a ng-href="{{ person.url }}" alt="{{ person.displayName }}\'s profile"><img ng-src="{{ person.image.url }}"></a>
-			</li>
-		</ul>
-	</section>
+	<div class="row">
+	 	<section class="block " ng-if="people.items">
+			<h3>Friends</h3>
+			<ul class="people-list">
+				<li ng-repeat="person in people.items | orderBy:random | limitTo:9" ng-if="person.url">
+					<a ng-href="{{ person.url }}" alt="{{ person.displayName }}'s profile"><img ng-src="{{ person.image.url }}">
+						<div>{{ person.displayName }}</div>
+					</a>
+				</li>
+			</ul>
+		</section>
+	</div>
 
 </div>

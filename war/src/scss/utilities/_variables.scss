@@ -5,21 +5,27 @@
 
 
 // Colors:
-
 $dark-gray: rgb(33, 35, 36);
+$light-gray: rgb(244,244,244);
 $muted: rgb(113, 113, 113);
 $brand: #0b9d80;
 $gplus-red: #ed5825;
-// Type:
 
+$body-bg: $light-gray;
+
+
+// Type:
 $base-size: 16px;
+$base-color: rgb(63, 67, 69);
 $sans-family: 'Open Sans', sans-serif;
+$header-family: 'Montserrat', sans-serif;
 
 $bold: 700;
 $narrow: 400;
 
-$font-color: $dark-gray;
+$font-color: rgb(63, 67, 69);
 
 
-// Responsive
-$break-sm: 30em;
+// Layout
+$max-width: 630px;
+$break-sm: 35em;

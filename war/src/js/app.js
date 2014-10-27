@@ -6,9 +6,7 @@ var app = angular.module('profileApp', [
 	'profileControllers'
 ]);
 
-
 /*
-
 app.config(['$routeProvider',
   function($routeProvider) {
 		console.log('Routerprovider started');
@@ -19,14 +17,14 @@ app.config(['$routeProvider',
         controller: 'ProfileCtrl'
       }).
 
-			when('/login', {
+			when('/people', {
         templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
+        controller: 'People'
       }).
 
 
       otherwise({
-        redirectTo: '/login'
+        redirectTo: '/profile'
       });
 }]);
 */

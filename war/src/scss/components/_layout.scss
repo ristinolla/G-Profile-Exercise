@@ -1,7 +1,7 @@
 // layout.scss
 // --------------
 body {
-	background-color: #efefef;
+	background-color: $body-bg;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -11,9 +11,10 @@ body {
 	font-size: 13px;
 	@media screen and (min-width: $break-sm){
 		//font-size: $base-size;
-		font-size: 16px;
+		font-size: 14px;
 	}
 }
+
 
 
 // Tama on oikeastaan aika nappara maaritelma =)
@@ -22,26 +23,21 @@ body {
 	margin-top: 1.5em;
 }
 
-.row > * {
-	@media screen and (min-width: $break-sm) {
-		margin-top: 0;
-	}
-}
-
 .margins-off > * {
 	margin-top: 0;
 }
 
-.row:after {
+.clearfix {
 	// http://css-tricks.com/snippets/css/clear-fix/ only ie8 up.
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
+
 
 .container {
 	background-color: white;
-	max-width: 60em;
+	max-width: $max-width;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
@@ -52,61 +48,23 @@ body {
 	padding-right: 1em;
 }
 
-.half {
+.row {
+	float: left;
+	@extend .clearfix;
+	width: 100%;
+}
 
+.row > * {
+	@media screen and (min-width: $break-sm) {
+		margin-top: 0;
+
+	}
+}
+
+
+.half {
 	@media screen and (min-width: $break-sm) {
 			width: 50%;
 			float: left;
-	}
-}
-
-
-
-//
-.login-dialog {
-	text-align: center;
-	padding: 2em;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 30em;
-	button {
-		margin: 2em;
-	}
-}
-
-
-.logout-dialog {
-	text-align: center;
-	padding: 2em;
-}
-
-
-
-
-.sneakpeak {
-	height: 2.5em;
-	overflow: hidden;
-	position: relative;
-	transition: all 0.5s;
- 	&:after {
-		content: '';
-		display: block;
-
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		top: 0;
-
-		background: rgb(255, 255, 255);
-		background: linear-gradient(to bottom, rgba(255,255,255,0.10) 0%,rgba(255,255,255,1) 100%);
-
-		transition: all 3.5s;
-	}
-	&.reveal {
-		height: auto;
-		transition: all 3.5s;
-		&:after {
-			background: none;
-		}
 	}
 }

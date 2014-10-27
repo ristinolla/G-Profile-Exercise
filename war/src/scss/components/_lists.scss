@@ -1,0 +1,92 @@
+// LISTS
+// -----
+
+li + li {
+	margin-top: 1em;
+}
+
+.inline-list {
+	li {
+		margin-top: 0;
+	}
+}
+
+.people-list {
+	list-style: none;
+	padding: 0;
+
+	margin-left: -2%;
+	text-align: center;
+
+	@media screen and (min-width: $break-sm){
+		text-align: left;
+	}
+
+	li {
+		display: inline-block;
+		width: 48%;
+		margin-left: 2%;
+		margin-top: 1em;
+
+		float: left;
+
+		a {
+			display: inline-block;
+			width: 100%;
+			color: $font-color;
+			min-height: 8em;
+			&:hover {
+				color: $brand;
+			}
+			@media screen and (min-width: $break-sm){
+				min-height:	3em;
+			}
+		}
+		div {
+			margin-top: 1em;
+		}
+
+		img {
+			height: 3em;
+			border-radius: 100%;
+			@media screen and (min-width: $break-sm){
+				margin-right: 1em;
+			}
+		}
+
+		img, div {
+			@media screen and (min-width: $break-sm){
+				// breaking the inception rule.. but hey, some rules are ment to be broken. #rebel
+				float: left;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+
+.short-info {
+	list-style:none;
+	padding-left: 0;
+	color: $muted;
+	line-height: 1.4em;
+
+	.icon {
+		font-size: 1.4em;
+		margin-right: 0.5em;
+	}
+
+}
+
+.desc-list {
+	list-style: none;
+	padding-left: 0;
+
+	li * {
+		margin-top: 0;
+	}
+	.name {
+		font-weight: bold;
+	}
+
+}
