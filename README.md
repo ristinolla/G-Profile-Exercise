@@ -35,3 +35,5 @@ Note on icons: I decided to use [Icomoon](https://icomoon.io/) and their icons i
 - There is always room for improving the design
 - Fallbacks for icons
 - More finished design
+- Auto Login, so the logout button doesn't break after reloading the page (this is due auth token and code being missing...)
+- TESTS!!
